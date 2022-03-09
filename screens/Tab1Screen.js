@@ -8,7 +8,7 @@ export default function Tab1Screen({ navigation }) {
   return (
     <View style={{flex: 1}}>
       <WebView
-        source={{ uri: 'http://192.168.0.39:5100/map.html' }}
+        source={{ uri: 'https://real-estate-g.web.app/map.html' }}
         style={{
           width: Dimensions.get('window').width
         }}
