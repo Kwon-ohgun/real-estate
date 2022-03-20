@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Button } from 'react-native';
 import { Dimensions } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { inject, observer } from 'mobx-react';
 
-
-export default function Tab1Screen({ navigation }) {
+function Tab1Screen({ navigation, estatesStore }) {
+  console.log(estatesStore);
   return (
     <View style={{flex: 1}}>
       <WebView
@@ -16,3 +17,5 @@ export default function Tab1Screen({ navigation }) {
     </View>
   );
 }
+
+export default inject('estatesStore')(observer(Tab1Screen));
