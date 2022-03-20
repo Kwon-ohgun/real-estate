@@ -2,13 +2,18 @@ import React from 'react';
 import { View, Button } from 'react-native';
 import { Dimensions } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { inject, observer } from 'mobx-react';
+import { useEffect } from 'react';
 
-
-export default function Tab1Screen({ navigation }) {
+function Tab1Screen({ navigation, estatesStore }) {
+  console.log(estatesStore);
+  useEffect(() => {
+    estatesStore.estatesRead();
+  }, [estatesStore]);
   return (
     <View style={{flex: 1}}>
       <WebView
-        source={{ uri: 'http://192.168.0.39:5100/map.html' }}
+        source={{ uri: 'https://real-estate-g.web.app/map.html' }}
         style={{
           width: Dimensions.get('window').width
         }}
@@ -16,3 +21,5 @@ export default function Tab1Screen({ navigation }) {
     </View>
   );
 }
+
+export default inject('estatesStore')(observer(Tab1Screen));

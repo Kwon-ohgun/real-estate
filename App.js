@@ -10,7 +10,8 @@ import Tab4Screen from './screens/Tab4Screen';
 import Tab5Screen from './screens/Tab5Screen';
 import { FontAwesome, AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
-
+import { Provider } from 'mobx-react';
+import { estatesStore } from './stores/estatesStore';
 
 const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
@@ -89,10 +90,14 @@ function BottomTabNavigator() {
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider
+      estatesStore={estatesStore}
+    >
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
