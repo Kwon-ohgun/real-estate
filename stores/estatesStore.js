@@ -1,5 +1,6 @@
 import { configure, makeAutoObservable } from 'mobx';
-
+import axios from 'axios';
+ 
 configure({
   // enforceActions: 'never',
   // useProxies: 'never'
@@ -11,6 +12,12 @@ export default class EstatesStore {
   }
 
   estates = [];
+
+  estatesRead() {
+    axios.get('https://real-estate-g-default-rtdb.firebaseio.com/estates.json').then((response) => {
+      console.log(response);
+    });
+  }
 }
 
 export const estatesStore = new EstatesStore();

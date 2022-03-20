@@ -3,9 +3,13 @@ import { View, Button } from 'react-native';
 import { Dimensions } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { inject, observer } from 'mobx-react';
+import { useEffect } from 'react';
 
 function Tab1Screen({ navigation, estatesStore }) {
   console.log(estatesStore);
+  useEffect(() => {
+    estatesStore.estatesRead();
+  }, [estatesStore]);
   return (
     <View style={{flex: 1}}>
       <WebView
