@@ -14,7 +14,7 @@ export default class EstatesStore {
   estates = [];
 
   estatesRead() {
-    axios.get('https://real-estate-g-default-rtdb.firebaseio.com/estates.json').then((response) => {
+    axios.get('https://real-estate-g-default-rtdb.firebaseio.com/congress.json').then((response) => {
       console.log(response);
     });
   }
