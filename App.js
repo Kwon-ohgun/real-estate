@@ -16,13 +16,23 @@ import { estatesStore } from './stores/estatesStore';
 const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator initialRouteName="Tab1">
+    <BottomTab.Navigator initialRouteName="Tab1"
+      screenOptions={{
+        tabBarStyle: {
+          // paddingBottom: 2
+          // marginBottom: 4
+        }
+      }}
+    >
       <BottomTab.Screen
         name="Tab1"
         component={Tab1Screen}
         options={({ navigation }) => ({
           title: '지도화면',
           tabBarLabel: '지도화면',
+          // tabBarLabelStyle: {
+          //   marginBottom: 2
+          // }, 
           headerTitleAlign: 'center',
           headerRight: () => (
             <Pressable onPress={() => {
