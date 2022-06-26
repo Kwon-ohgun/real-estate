@@ -12,11 +12,17 @@ export default class EstatesStore {
   }
 
   estates = [];
+  enviromento = false;
+  webView = null;
 
   estatesRead() {
     axios.get('https://real-estate-g-default-rtdb.firebaseio.com/congress.json').then((response) => {
       console.log(response);
     });
+  }
+
+  toggleEnviromento() {
+    this.enviromento = !this.enviromento;
   }
 }
 

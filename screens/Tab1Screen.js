@@ -8,13 +8,15 @@ import { useEffect } from 'react';
 
 function Tab1Screen({ navigation, estatesStore }) {
   const webView = useRef();
-  console.log(estatesStore);
   useEffect(() => {
-    estatesStore.estatesRead();
+    // estatesStore.estatesRead();
+    estatesStore.webView = webView;
   }, [estatesStore]);
   setTimeout(() => {
+    // 화면이 그려지기 전에 호출 되면 안됨
     webView.current.injectJavaScript(`webFunction(${Dimensions.get('window').width}, ${Dimensions.get('window').height}); true;`);
-  }, 1000);
+  }, 2000);
+
   return (
     <View style={{flex: 1}}>
       <WebView
