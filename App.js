@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Text, View } from 'react-native';
+import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -8,7 +8,7 @@ import Tab2Screen from './screens/Tab2Screen';
 import Tab3Screen from './screens/Tab3Screen';
 import Tab4Screen from './screens/Tab4Screen';
 import Tab5Screen from './screens/Tab5Screen';
-import { FontAwesome, AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
+import { AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
 import { Provider } from 'mobx-react';
 import { estatesStore } from './stores/estatesStore';
@@ -25,19 +25,32 @@ function BottomTabNavigator() {
           tabBarLabel: '지도화면',
           headerTitleAlign: 'center',
           headerRight: () => (
-            <Pressable onPress={() => navigation.navigate()}>
+            <Pressable onPress={() => {
+              estatesStore.toggleEnviromento();
+              estatesStore.webView.current.injectJavaScript(`webFunctionSearch(${estatesStore.enviromento}); true;`);
+            }}>
               <AntDesign
                 name="enviromento"
                 size={25}
-                style={{color: 'blue', marginRight: 25}}
+                style={{color: 'blue', marginRight: 16}}
               />
             </Pressable>
           ),
-          tabBarIcon: () => <FontAwesome
-            name="map-o"
-            size={24}
-            color="black"
-          />
+          tabBarIcon: () => {
+            return navigation.getState().index === 0 ? <Image
+              style={{
+                width: 24,
+                height: 24
+              }}
+              source={require('./assets/map.jpg')}
+              /> : <Image
+              style={{
+                width: 24,
+                height: 24
+              }}
+              source={require('./assets/map-o.jpg')}
+            />
+          }
         })}
       />
       <BottomTab.Screen
