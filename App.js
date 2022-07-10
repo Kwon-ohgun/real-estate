@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Image, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -112,7 +112,20 @@ function BottomTabNavigator() {
 
 const Stack = createNativeStackNavigator();
 export default function App() {
+  const [isLoading, setIsLodaing] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLodaing(false);
+    }, 1000);
+  }, []);
   return (
+    isLoading ? <Image
+    style={{
+      width: '100%',
+      height: '100%'
+    }}
+    source={require('./assets/splash.png')}
+    /> :
     <Provider
       estatesStore={estatesStore}
     >
