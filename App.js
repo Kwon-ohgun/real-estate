@@ -124,7 +124,7 @@ export default function App() {
       width: '100%',
       height: '100%'
     }}
-    source={require('./assets/splash.png')}
+    source={require('./assets/splash.jpg')}
     /> :
     <Provider
       estatesStore={estatesStore}
