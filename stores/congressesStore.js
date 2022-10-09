@@ -14,13 +14,22 @@ export default class CongressesStore {
   congresses = [];
   enviromento = false;
   webView = null;
+  isLoading = false;
 
-  congressesRead() {
+  congressesRead(word) {
+    console.log(word)
+    this.isLoading = true;
     axios.get('https://real-estate-g-default-rtdb.firebaseio.com/congresses.json').then((response) => {
+      const congresses = []
       response.data.forEach((congress) => {
-        congress.congressAll = [].concat(congress.assetsMy || [], congress.assetsMyRelative || []);
+        // 검색 조건
+        if (!word || (congress.name.includes(word) || congress.team.includes(word))) {
+          congress.congressAll = [].concat(congress.assetsMy || [], congress.assetsMyRelative || []);
+          congresses.push(congress)
+        }
       });
-      this.congresses = response.data;
+      this.congresses = congresses;
+      this.isLoading = false;
     });
   }
 

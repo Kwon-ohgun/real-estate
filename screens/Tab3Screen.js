@@ -1,13 +1,16 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Text } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 export default function Tab3Screen({ navigation }) {
   return (
-    <View>
-      <Button
-        title="Tab3Detail"
-        onPress={() => navigation.navigate('Tab3Detail')}
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Feather
+        name="alert-triangle"
+        size={100}
+        color = "black"
       />
+      <Text>공사중</Text>
     </View>
   );
 }

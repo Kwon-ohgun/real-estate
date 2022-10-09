@@ -6,12 +6,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Tab1Screen from './screens/Tab1Screen';
 import Tab2Screen from './screens/Tab2Screen';
 import Tab3Screen from './screens/Tab3Screen';
-import Tab4Screen from './screens/Tab4Screen';
 import Tab5Screen from './screens/Tab5Screen';
 import { AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
 import { Provider } from 'mobx-react';
 import { congressesStore } from './stores/congressesStore';
+import { Feather } from '@expo/vector-icons';
 
 const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
@@ -66,45 +66,56 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="통합검색"
         component={Tab2Screen}
-        options={{
-          tabBarIcon: () => <AntDesign
-              name="message1"
-              size={24}
-              color = "black"
+        options={({ navigation }) => ({
+          tabBarIcon: () => {
+            return navigation.getState().index === 1 ? <Image
+              style={{
+                width: 24,
+                height: 24
+              }}
+              source={require('./assets/search.png')}
+              /> : <Image
+              style={{
+                width: 24,
+                height: 24
+              }}
+              source={require('./assets/search-o.png')}
             />
-         }}      
+          }
+         })}      
       />
       <BottomTab.Screen
         name="주식자산"
         component={Tab3Screen}
         options={{
           tabBarLabel: "주식자산",
-          tabBarIcon: () => <Entypo
-              name="news"
+          tabBarIcon: () => <Feather
+              name="alert-triangle"
               size={24}
               color = "black"
             />
-        }}
-      />
-      <BottomTab.Screen
-        name="Tab4"
-        component={Tab4Screen}
-        options={{
-          title: '테스트',
-          tabBarLabel: '테스트',
-          headerTitleAlign: 'center'
         }}
       />
       <BottomTab.Screen
         name="내 정보"
         component={Tab5Screen}
-        options={{
-          tabBarIcon: () => <FontAwesome5
-              name="user"
-              size={24}
-              color = "black"
+        options={({ navigation }) => ({
+          tabBarIcon: () => {
+            return navigation.getState().index === 3 ? <Image
+              style={{
+                width: 24,
+                height: 24
+              }}
+              source={require('./assets/user.png')}
+              /> : <Image
+              style={{
+                width: 24,
+                height: 24
+              }}
+              source={require('./assets/user-o.png')}
             />
-        }}
+          }
+        })}
       />
     </BottomTab.Navigator>
   );
