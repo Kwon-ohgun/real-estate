@@ -11,7 +11,7 @@ import Tab5Screen from './screens/Tab5Screen';
 import { AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
 import { Provider } from 'mobx-react';
-import { estatesStore } from './stores/estatesStore';
+import { congressesStore } from './stores/congressesStore';
 
 const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
@@ -36,8 +36,8 @@ function BottomTabNavigator() {
           headerTitleAlign: 'center',
           headerRight: () => (
             <Pressable onPress={() => {
-              estatesStore.toggleEnviromento();
-              estatesStore.webView.current.injectJavaScript(`webFunctionSearch(${estatesStore.enviromento}); true;`);
+              congressesStore.toggleEnviromento();
+              congressesStore.webView.current.injectJavaScript(`webFunctionSearch(${congressesStore.enviromento}); true;`);
             }}>
               <AntDesign
                 name="enviromento"
@@ -127,7 +127,7 @@ export default function App() {
     source={require('./assets/splash.jpg')}
     /> :
     <Provider
-      estatesStore={estatesStore}
+      congressesStore={congressesStore}
     >
       <NavigationContainer>
         <Stack.Navigator>

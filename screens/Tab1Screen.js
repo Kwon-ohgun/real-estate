@@ -6,12 +6,12 @@ import { inject, observer } from 'mobx-react';
 import { useEffect } from 'react';
 
 
-function Tab1Screen({ navigation, estatesStore }) {
+function Tab1Screen({ navigation, congressesStore }) {
   const webView = useRef();
   useEffect(() => {
-    // estatesStore.estatesRead();
-    estatesStore.webView = webView;
-  }, [estatesStore]);
+    // congressesStore.congressesRead();
+    congressesStore.webView = webView;
+  }, [congressesStore]);
   // setTimeout(() => {
   //   // 화면이 그려지기 전에 호출 되면 안됨
   //   webView.current.injectJavaScript(`webFunction(${Dimensions.get('window').width}, ${Dimensions.get('window').height}); true;`);
@@ -40,4 +40,4 @@ function Tab1Screen({ navigation, estatesStore }) {
   );
 }
 
-export default inject('estatesStore')(observer(Tab1Screen));
+export default inject('congressesStore')(observer(Tab1Screen));
