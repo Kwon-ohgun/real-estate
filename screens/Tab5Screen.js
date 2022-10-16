@@ -1,13 +1,18 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import { inject, observer } from 'mobx-react';
+import { signOut, getAuth } from 'firebase/auth'
 
-export default function Tab5Screen({ navigation }) {
+const Tab5Screen = ({ userStore }) => {
+  const user = userStore.user;
   return (
     <View>
-      <Button
-        title="Tab5Detail"
-        onPress={() => navigation.navigate('Tab5Detail')}
-      />
+      <Text>{user.displayName}</Text>
+      <Button title='logout' onPress={() => {
+        signOut(getAuth());
+      }}></Button>
     </View>
   );
 }
+
+export default inject('userStore')(observer(Tab5Screen));

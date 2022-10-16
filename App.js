@@ -11,7 +11,38 @@ import { AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
 import { Provider } from 'mobx-react';
 import { congressesStore } from './stores/congressesStore';
+import { userStore } from './stores/userStore';
 import { Feather } from '@expo/vector-icons';
+import { initializeApp } from "firebase/app";
+import { getAuth, signInAnonymously, onAuthStateChanged, updateProfile } from 'firebase/auth'
+
+
+initializeApp({
+  apiKey: "AIzaSyD8y8vBluO_pEWVdnD9K5Go2gkAORkWyRc",
+  authDomain: "real-estate-g.firebaseapp.com",
+  databaseURL: "https://real-estate-g-default-rtdb.firebaseio.com",
+  projectId: "real-estate-g",
+  storageBucket: "real-estate-g.appspot.com",
+  messagingSenderId: "759734943780",
+  appId: "1:759734943780:web:03df75cbebd71505aa98b1"
+});
+const auth = getAuth();
+onAuthStateChanged(auth, user => {
+  console.log('로그인 상태 변경', user)
+  if (user) {
+    console.log(user);
+    userStore.setUser(user)
+  } else {
+    signInAnonymously(auth).then((user) => {
+      console.log(user)
+      updateProfile(auth.currentUser, {
+        displayName: '사용자'
+      })
+    }).catch((error) => {
+      console.error(error)
+    });
+  }
+})
 
 const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
@@ -139,6 +170,7 @@ export default function App() {
     /> :
     <Provider
       congressesStore={congressesStore}
+      userStore={userStore}
     >
       <NavigationContainer>
         <Stack.Navigator>
